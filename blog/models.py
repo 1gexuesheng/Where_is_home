@@ -102,11 +102,11 @@ class Post(models.Model):
     @staticmethod
     def get_by_tag(tag_id):
         try:
-            tag = Tag.objects.get(id=tag_id)
+            tag = Tag.objects.get(id=tag_id)    # 1
         except Tag.DoesNotExist:
             tag = None
             post_list = []
-        else:
+        else:       # 1.先找到文章，通过标签，然后懒加载文章对应的用户和分类
             post_list = tag.post_set.filter(status=Post.STATUS_NORMAL)\
             .select_related('owner', 'category')
 
@@ -115,22 +115,28 @@ class Post(models.Model):
     @staticmethod
     def get_by_category(category_id):
         try:
-            category = Category.objects.get(id=category_id)
+            # print(category_id, type(category_id))   # None <class 'NoneType'>
+
+            category = Category.objects.get(id=category_id)   # 可以但是 category_id 不可以
+            print('category', category)
         except Category.DoesNotExist:
             category = None
             post_list = []
         else:
+
             post_list = category.post_set.filter(status=Post.STATUS_NORMAL)\
                 .select_related('owner', 'category')
-
+        print('get_by_category', post_list, category)
         return post_list, category
 
     @classmethod
     def latest_posts(cls):
         queryset = cls.objects.filter(status=cls.STATUS_NORMAL)
         #  没有return cls的函数
-
+        print('latest_posts', queryset)
+        return queryset
     # 7.3.1调整模型
     @classmethod
     def hot_posts(cls):
+        print('hot_posts', cls.objects.filter(status=cls.STATUS_NORMAL).order_by('-pv'))
         return cls.objects.filter(status=cls.STATUS_NORMAL).order_by('-pv')

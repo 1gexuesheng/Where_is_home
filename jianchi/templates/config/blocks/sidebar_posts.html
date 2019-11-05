@@ -9,23 +9,19 @@
 
 </head>
 <body>
+
+
+
 <ul>
-    {% for comment in comments %}
-        <li>
-{#            <a href="/post/{{ comment.target_id }}.html">{{ comment.target.title }}</a>#}
-
-            <a href="{% url 'post-detail' comment.target_id %}">{{ comment.target.title }} </a>
-
-            {{ comment.nickname }}:{{ comment.content }}
-        </li>
+    {% for post in posts %}
+            {#        <li><a href="/post/{{ post.id }}.html">{{ post.title }}</a>#}
+            <a href="{% url 'post-detail' post.id %}">{{ post.title }}</a>
     {% endfor %}
-
 </ul>
 
-<script>
-
-</script>
 </body>
+
+
 
 </html>
 

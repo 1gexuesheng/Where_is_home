@@ -48,10 +48,15 @@ def post_list(request, category_id = None, tag_id = None):
     # 5 使用model里写的函数
     tag = None
     category = None
-    if tag_id:
-        post_list, tag = Post.get_by_tag(tag_id)
-    elif category_id:
-        post_list, category = Post.get_by_category(category)
+    if tag_id:  # 1
+        print('tag', tag_id)
+        post_list, tag = Post.get_by_tag(tag_id)    # post_list = (owner, post_list)
+    elif category_id:    # 1
+        print('cate', category_id)
+        # post_list, category = Post.get_by_category(category)    #这里写错了，传参是id，怎么穿了个这个为None
+        post_list, category = Post.get_by_category(category_id)
+
+
     else:
         post_list = Post.latest_posts()
 
