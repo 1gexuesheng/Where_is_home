@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # 'blog',
+    'jianchi',  #
     'config',
     'commit',   # 书上写的comment,看清楚有的地方
     'django.contrib.admin',

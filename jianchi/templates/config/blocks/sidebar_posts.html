@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+<body>
+<ul>
+    {% for comment in comments %}
+        <li>
+{#            <a href="/post/{{ comment.target_id }}.html">{{ comment.target.title }}</a>#}
+
+            <a href="{% url 'post-detail' comment.target_id %}">{{ comment.target.title }} </a>
+
+            {{ comment.nickname }}:{{ comment.content }}
+        </li>
+    {% endfor %}
+
+</ul>
+
+<script>
+
+</script>
+</body>
+
+</html>
+
+
+
+ 

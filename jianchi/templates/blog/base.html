@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+    {% block title %}
+        首页
+    {% endblock %} - Todolist 博客系统
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+<body>
+
+
+<div>顶部分类
+    {% for cate in navs %}
+{#        <a href="/category/{{ cate.id }}">{{ cate.name }}</a>#}
+{#        <a href="{% url 'post-detail' post.id %}">{{ post.title }} </a>#}
+        <a href="{% url 'category-list' cate.id %}">{{ cate.name }} </a>
+
+    {% endfor %}
+</div>
+<hr>
+
+{% block main %}
+
+{% endblock %}
+
+
+    底部分类
+    {% for cate in categories %}
+    {#        <a href="/category/{{ cate.id }}">{{ cate.name }}</a>#}
+    <a href="{% url 'category-list' cate.id %}">{{ cate.name }} </a>
+
+    {% endfor %}
+
+    <div>侧边栏展示：
+        {% for siderbar in siderbars %}
+            <h4>{{ siderbar.title }}</h4>
+            {{ siderbar.content }}
+        {% endfor %}
+    </div>
+</div>
+<script>
+
+</script>
+</body>
+
+</html>
+
+
+
+ 
